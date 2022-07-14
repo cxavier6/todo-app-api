@@ -5,18 +5,36 @@ class Usuarios{
     static rotas(app){
         app.get('/usuarios', (req, res) => {
             
-            const nome = "José"
-            const email = "josé@couve.com"
+            const nome = "Camila"
+            const email = "camila@camila.com"
             const telefone = "219999999"
 
             const isValid = ValidacoesService.isValid(nome, email, telefone)
 
             if(isValid) {
                 const usuario = new UsuarioModel(nome, email, telefone)
-                res.send(usuario)
+                res.status(200).json({...usuario, verbo: "get"})
             } else {
                 res.status(400).send("Erro")
             }
+
+        })
+
+        app.post('/usuarios', (req,res) => {
+           
+            const nome = "Camila"
+            const email = "camila@camila.com"
+            const telefone = "219999999"
+
+            const isValid = ValidacoesService.isValid(nome, email, telefone)
+
+            if(isValid) {
+                const usuario = new UsuarioModel(nome, email, telefone)
+                res.status(201).json({...usuario, verbo: "post"})
+            } else {
+                res.status(400).send("Erro")
+            }
+        
         })
     }
 }
